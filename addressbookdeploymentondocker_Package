@@ -1,0 +1,11 @@
+touch dockerfile
+cat <<EOT>> dockerfile
+From tomcat 8
+ADD target/addressbook.war /usr/local/tomcat/webapps
+EXPOSE 8080
+CMD ["catalina.sh" "run"]
+EOT
+sudo docker build -t rajenderdevops1/myprivaterepo:$BUILD_NUMBER
+sudo docker login -u USERNAME -p PASSWORD
+sudo docker push rajenderdevops1/myprivaterepo:$BUILD_NUMBER
+sudo docker run -itd -P rajenderdevops1/myprivaterepo:$BUILD_NUMBER
